@@ -15,15 +15,10 @@ pipeline {
             }
         }
 
-    }
-
-    post {
-        success {
-            echo 'Build Successful'
-        }
-
-        failure {
-            echo 'Build Failed'
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t employee-management:v1 .'
+            }
         }
     }
 }
