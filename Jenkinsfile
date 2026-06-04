@@ -20,6 +20,15 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        stage('Verify AWS and EKS') {
+            steps {
+                sh '''
+                whoami
+                aws sts get-caller-identity
+                kubectl get nodes
+                '''
+            }
+        }
 
         stage('Docker Build') {
             steps {
